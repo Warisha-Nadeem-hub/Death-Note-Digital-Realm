@@ -29,10 +29,38 @@ const databaseLayer = document.getElementById('database-layer');
 const uiLayer = document.getElementById('ui-layer');
 const dossierModal = document.getElementById('dossier-modal');
 
-// --- STAGE FLOW LOGIC ---
+// Audio Management References
+const bgMusic = document.getElementById('bg-music');
+const musicToggleBtn = document.getElementById('music-toggle-btn');
+
+// System Initializer Trigger
 document.getElementById('skip-intro-btn').addEventListener('click', () => {
+    // Start music playback safely
+    if (bgMusic) {
+        bgMusic.volume = 0.4;
+        bgMusic.play()
+            .then(() => {
+                // Display the mute/unmute option once music officially starts
+                musicToggleBtn.classList.add('visible');
+            })
+            .catch(error => console.log("Audio playback blocked:", error));
+    }
+
     introLayer.classList.remove('active');
     databaseLayer.classList.add('active');
+});
+
+// Interactive Play / Pause Event Listener Matrix
+musicToggleBtn.addEventListener('click', () => {
+    if (bgMusic.paused) {
+        bgMusic.play();
+        musicToggleBtn.innerText = "🔊 AUDIO ON";
+        musicToggleBtn.classList.remove('muted');
+    } else {
+        bgMusic.pause();
+        musicToggleBtn.innerText = "🔇 AUDIO MUTED";
+        musicToggleBtn.classList.add('muted');
+    }
 });
 
 // Star Node Click Management (Updated to target .star-node)
