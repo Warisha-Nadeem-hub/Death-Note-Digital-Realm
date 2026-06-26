@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DEATH NOTE // Digital Realm</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Cinzel:wght@700;900&family=Special+Elite&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+</head>
+<body>
+
+    <div class="video-bg-container">
+        <video autoplay muted loop playsinline id="bg-ambient-video">
+            <source src="https://assets.mixkit.co/videos/preview/mixkit-abstract-dark-ink-in-water-43046-large.mp4" type="video/mp4">
+        </video>
+        <div class="nebula-overlay"></div>
+        <div class="starfield-simulation"></div>
+    </div>
+
+    <div id="intro-layer" class="stage-layer active">
+        <div class="intro-glass-card">
+            <div class="shinigami-eye-glow"></div>
+            <h1 class="title-card">DEATH NOTE</h1>
+            <div class="divider-line"></div>
+            <p class="warning-text">The human whose name is written in this note shall die.</p>
+            <button id="skip-intro-btn"><span class="btn-text">INITIALIZE SYSTEM</span></button>
+        </div>
+    </div>
+
+    <div id="database-layer" class="stage-layer">
+        <div class="system-header">
+            <h2 class="section-title">STELLAR INTELLIGENCE NETWORK</h2>
+            <p class="system-subtitle">Select a target node to decode consciousness data...</p>
+        </div>
+        
+        <div class="space-map-container">
+            <div class="star-node glow-red" data-char="kira" style="top: 25%; left: 20%;">
+                <div class="star-core"></div>
+                <div class="star-pulse-ring"></div>
+                <span class="star-label">NODE // KIRA</span>
+            </div>
+            
+            <div class="star-node glow-blue" data-char="l" style="top: 55%; left: 45%;">
+                <div class="star-core"></div>
+                <div class="star-pulse-ring"></div>
+                <span class="star-label">NODE // L</span>
+            </div>
+            
+            <div class="star-node glow-purple" data-char="misa" style="top: 35%; left: 75%;">
+                <div class="star-core"></div>
+                <div class="star-pulse-ring"></div>
+                <span class="star-label">NODE // MISA</span>
+            </div>
+            
+            <div class="star-node glow-white" data-char="ryuk" style="top: 70%; left: 70%;">
+                <div class="star-core"></div>
+                <div class="star-pulse-ring"></div>
+                <span class="star-label">NODE // RYUK</span>
+            </div>
+        </div>
+        
+        <button id="proceed-to-note-btn">ACCESS WRITING TERMINAL →</button>
+    </div>
+
+    <div id="dossier-modal" class="modal-hidden">
+        <div class="cyber-dossier-card">
+            <div class="corner-bracket tl"></div>
+            <div class="corner-bracket tr"></div>
+            <div class="corner-bracket bl"></div>
+            <div class="corner-bracket br"></div>
+            
+            <button id="close-modal-btn">✕</button>
+            <div class="dossier-header">
+                <span class="security-tag">CLASSIFIED // DEEP_INTEL</span>
+                <h2 id="modal-name">TARGET IDENTITY</h2>
+                <p class="modal-status">LIFE_SIGNAL: <span id="modal-status-val">UNKNOWN</span></p>
+            </div>
+            <div class="card-divider"></div>
+            <div class="dossier-body">
+                <p id="modal-desc">Parsing consciousness files...</p>
+            </div>
+        </div>
+    </div>
+
+    <canvas id="webgl-canvas"></canvas>
+
+    <div id="ui-layer" class="stage-layer">
+        <div class="ui-panel left-panel blueprint-card">
+            <div class="card-header">OPERATIONAL LAWS</div>
+            <div class="rules-container">
+                <p><span class="rule-num">I.</span> The human whose name is written in this note shall die.</p>
+                <p><span class="rule-num">II.</span> This note will not take effect unless the writer has the person's face in their mind.</p>
+                <p><span class="rule-num">III.</span> If the cause of death is written within 40 seconds, it will happen.</p>
+                <p><span class="rule-num">IV.</span> If the cause of death is not specified, the person will die of a heart attack.</p>
+            </div>
+        </div>
+
+        <div class="ui-panel right-panel blueprint-card">
+            <div class="card-header">TERMINAL INPUT</div>
+            <div class="input-wrapper">
+                <input type="text" id="target-name" placeholder="ENTER HUMAN TARGET..." autocomplete="off">
+                <span class="input-focus-line"></span>
+            </div>
+            <button id="write-btn">EXECUTE SENTENCE</button>
+        </div>
+    </div>
+
+    <div id="kill-overlay">
+        <div class="heartbeat-pulse"></div>
+        <h1 id="status-text">MONITORING BIOMETRICS...</h1>
+        <div class="countdown-display" id="death-timer">40</div>
+    </div>
+
+    <div id="climax-layer">
+        <div class="glitch-wrapper">
+            <h1 class="climax-title" data-text="ELIMINATED">ELIMINATED</h1>
+            <p class="climax-sub">HEART FAILURE CONFIRMED // SYSTEM RESET</p>
+        </div>
+        <div class="red-flash-screen"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
